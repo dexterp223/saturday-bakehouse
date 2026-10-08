@@ -1,7 +1,7 @@
 // ▼ Edit this file each week. Every page reads its bakes from here.
 const BUSINESS_EMAIL = "dexterp0223@gmail.com";
-const PICKUP_HOURS = "Saturdays · 8am until noon";
-const PICKUP_PLACE = "Nuvali, Santa Rosa, Laguna";
+const PICKUP_HOURS = "Saturdays · 1pm to 4pm";
+const PICKUP_PLACE = "Tokyo Mansions Clubhouse";
 const PAYMENT = "Cash, GCash or bank transfer";
 const ORDER_CUTOFF = "Wednesday 8pm"; // set to "" to hide
 const KITCHEN_NOTE = "Our kitchen also handles tree nuts, peanuts, sesame and soy, so any bake may contain traces. We don’t offer gluten-free bakes yet.";

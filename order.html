@@ -22,9 +22,9 @@
       <ol class="steps">
         <li>Choose your bakes</li>
         <li>Send the order email</li>
-        <li>Pay and pick up on Saturday</li>
+        <li>Pay, then pick up or get it delivered on Saturday</li>
       </ol>
-      <p class="note">Pickup is at <span data-place></span>. Pay by <span data-pay></span>. We’ll reply by Thursday to confirm your order.</p>
+      <p class="note">Pickup is at <span data-place></span>. Or choose delivery by Grab or Lalamove; we book the rider and you pay the delivery fee. Pay for your bakes by <span data-pay></span>. We’ll reply by Thursday to confirm your order.</p>
     </div>
 
     <form class="slip" id="orderForm" novalidate>
@@ -33,12 +33,20 @@
       <div class="total"><span>Total</span><span id="total">₱0</span></div>
       <div class="fields">
         <label>Your name<input id="custName" type="text" autocomplete="name" placeholder="Jamie Baker"></label>
-        <label>Pickup time
+        <label class="full">Pickup or delivery
+          <select id="method">
+            <option value="pickup">Pickup at Tokyo Mansions Clubhouse</option>
+            <option value="Grab">Delivery via Grab</option>
+            <option value="Lalamove">Delivery via Lalamove</option>
+          </select>
+        </label>
+        <label class="full" id="addrWrap" hidden>Delivery address<textarea id="address" autocomplete="street-address" placeholder="House no., street, subdivision, city"></textarea></label>
+        <label id="phoneWrap" hidden>Mobile number for the rider<input id="phone" type="tel" autocomplete="tel" placeholder="0917 123 4567"></label>
+        <label><span id="timeLabel">Pickup time</span>
           <select id="pickupTime">
-            <option>8:00 – 9:00am</option>
-            <option>9:00 – 10:00am</option>
-            <option>10:00 – 11:00am</option>
-            <option>11:00am – noon</option>
+            <option>1:00 – 2:00pm</option>
+            <option>2:00 – 3:00pm</option>
+            <option>3:00 – 4:00pm</option>
           </select>
         </label>
         <label class="full">Notes (optional)<textarea id="notes" placeholder="Slice the sourdough, please"></textarea></label>
@@ -84,13 +92,35 @@ render();
 const sat = nextSaturday().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
 document.getElementById("pickupLabel").textContent = "Pickup: " + sat;
 
+const methodEl = document.getElementById("method");
+const isDelivery = () => methodEl.value !== "pickup";
+function syncMethod() {
+  const d = isDelivery();
+  document.getElementById("addrWrap").hidden = !d;
+  document.getElementById("phoneWrap").hidden = !d;
+  document.getElementById("timeLabel").textContent = d ? "Delivery time" : "Pickup time";
+  document.getElementById("pickupLabel").textContent = (d ? "Delivery: " : "Pickup: ") + sat;
+}
+methodEl.addEventListener("change", syncMethod);
+syncMethod();
+
 function orderText() {
   const name = document.getElementById("custName").value.trim();
   const notes = document.getElementById("notes").value.trim();
+  const time = document.getElementById("pickupTime").value;
   const items = BAKES.filter(b => qtys[b.id] > 0).map(b => `  ${qtys[b.id]} × ${b.name} (${money(qtys[b.id] * b.price)})`);
+  const how = isDelivery()
+    ? [`for delivery via ${methodEl.value} on ${sat}, ${time}:`]
+    : [`for pickup at ${PICKUP_PLACE} on ${sat}, ${time}:`];
+  const delivery = isDelivery()
+    ? ["", `Delivery address: ${document.getElementById("address").value.trim()}`,
+       `Mobile: ${document.getElementById("phone").value.trim()}`,
+       `I'll pay the ${methodEl.value} delivery fee.`]
+    : [];
   return ["Hello Jade’s Saturday Bakehouse,", "",
-    `I'd like to reserve the following for pickup on ${sat}, ${document.getElementById("pickupTime").value}:`, "",
-    ...items, "", `Total: ${money(total())}`, notes ? `\nNotes: ${notes}` : "", "", "Thank you!", name].join("\n");
+    `I'd like to reserve the following ${how[0]}`, "",
+    ...items, "", `Total for bakes: ${money(total())}`, ...delivery,
+    notes ? `\nNotes: ${notes}` : "", "", "Thank you!", name].join("\n");
 }
 
 const status = document.getElementById("status");
@@ -99,6 +129,10 @@ document.getElementById("orderForm").addEventListener("submit", e => {
   if (!total()) { status.textContent = "Add at least one bake to your order."; return; }
   const name = document.getElementById("custName").value.trim();
   if (!name) { status.textContent = "Add your name so we know whose order it is."; document.getElementById("custName").focus(); return; }
+  if (isDelivery()) {
+    if (!document.getElementById("address").value.trim()) { status.textContent = "Add your delivery address."; document.getElementById("address").focus(); return; }
+    if (!document.getElementById("phone").value.trim()) { status.textContent = "Add a mobile number so the rider can reach you."; document.getElementById("phone").focus(); return; }
+  }
   location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent("Saturday order: " + name)}&body=${encodeURIComponent(orderText())}`;
   status.textContent = "Opening your email app. Press send there to place the order.";
 });
