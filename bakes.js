@@ -1,6 +1,6 @@
 // ▼ Edit this file each week. Every page reads its bakes from here.
-const BUSINESS_EMAIL = "dexterp0223@gmail.com";
-const CC_EMAILS = ["jadenicep@gmail.com", "jadexedric@yahoo.com"]; // copied on every order email
+const BUSINESS_EMAIL = "jadenicep@gmail.com";
+const CC_EMAILS = ["dexterp0223@gmail.com", "jadexedric@yahoo.com"]; // copied on every order email
 const PICKUP_HOURS = "Saturdays · 1pm to 4pm";
 const PICKUP_PLACE = "Tokyo Mansions Clubhouse";
 const PAYMENT = "Cash, GCash or bank transfer";
