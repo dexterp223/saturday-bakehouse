@@ -8,21 +8,21 @@ const KITCHEN_NOTE = "Our kitchen also handles tree nuts, peanuts, sesame and so
 
 const BAKES = [
   {
-    id: "sourdough", name: "Sourdough", price: 450, unit: "loaf", meta: "Loaf · 36 hr ferment",
+    id: "sourdough", name: "Sourdough", price: 500, unit: "loaf", meta: "Loaf · 36 hr ferment",
     description: "Open crumb, blistered crust, a gentle tang from our six-year-old starter.",
     photo: "img/sourdough.jpg", alt: "A scored sourdough loaf with a leaf pattern on the crust",
     credit: "Kate Tepla / Unsplash",
     allergens: "Wheat (gluten)."
   },
   {
-    id: "focaccia", name: "Focaccia", price: 350, unit: "slab", meta: "Slab · olive oil & rosemary",
+    id: "focaccia", name: "Focaccia", price: 450, unit: "slab", meta: "Slab · olive oil & rosemary",
     description: "Dimpled and golden with olive oil, flaky salt, and fresh rosemary.",
     photo: "img/focaccia.jpg", alt: "Golden focaccia topped with rosemary",
     credit: "Quin Engle / Unsplash",
     allergens: "Wheat (gluten)."
   },
   {
-    id: "rolls", name: "Cinnamon rolls", price: 125, unit: "each", meta: "Each · glazed warm",
+    id: "rolls", name: "Cinnamon rolls", price: 150, unit: "each", meta: "Each · glazed warm",
     description: "Soft, buttery swirls with brown-sugar cinnamon and a vanilla glaze.",
     photo: "img/cinnamon-rolls.jpg", alt: "A pan of freshly baked cinnamon rolls",
     credit: "Phil Hearing / Unsplash",
