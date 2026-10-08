@@ -8,7 +8,7 @@ const KITCHEN_NOTE = "Our kitchen also handles tree nuts, peanuts, sesame and so
 
 const BAKES = [
   {
-    id: "sourdough", name: "Sourdough", price: 500, unit: "loaf", meta: "Loaf · 36 hr ferment",
+    id: "sourdough", name: "Sourdough", price: 480, unit: "loaf", meta: "Loaf · 36 hr ferment",
     description: "Open crumb, blistered crust, a gentle tang from our six-year-old starter.",
     photo: "img/sourdough.jpg", alt: "A scored sourdough loaf with a leaf pattern on the crust",
     credit: "Kate Tepla / Unsplash",
