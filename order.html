@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Order · Saturday Bakehouse</title>
+<title>Order · Jade’s Saturday Bakehouse</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&family=Courier+Prime&display=swap">
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
 <div class="wrap" data-page="order">
   <header class="top">
-    <a class="mark" href="./"><svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="16" ry="11" fill="var(--accent)"/><path d="M10 19c3-3 5-3 7 0M17 17c3-3 5-3 7 0M24 19c3-3 5-3 7 0" stroke="var(--bg)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Saturday Bakehouse</a>
+    <a class="mark" href="./"><svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="16" ry="11" fill="var(--accent)"/><path d="M10 19c3-3 5-3 7 0M17 17c3-3 5-3 7 0M24 19c3-3 5-3 7 0" stroke="var(--bg)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Jade’s Saturday Bakehouse</a>
     <nav class="nav" aria-label="Main"><a href="./" data-page="home">Home</a><a href="menu.html" data-page="menu">Menu</a><a href="order.html" data-page="order">Order</a><a href="about.html" data-page="about">About</a><a href="faq.html" data-page="faq">FAQ</a></nav>
   </header>
 
@@ -50,19 +50,21 @@
   </section>
 
   <footer>
-    <div class="mark">Saturday Bakehouse</div>
+    <div class="mark">Jade’s Saturday Bakehouse</div>
     <div>Fresh Every Saturday · <span data-email></span></div>
   </footer>
 </div>
 <script>document.write('<script src="bakes.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
-const START = { sourdough: 1, focaccia: 1, rolls: 4 };
+const START = { sourdough: 1, focaccia: 1, spanish: 1 };
 const qtys = {};
+const step = id => BAKES.find(b => b.id === id).step || 1;
 const linesEl = document.getElementById("lines");
 linesEl.innerHTML = BAKES.map(b => {
   qtys[b.id] = START[b.id] ?? 0;
+  const by = b.step > 1 ? ` · by the dozen` : "";
   return `<div class="line" data-id="${b.id}">
-    <div><div class="name">${esc(b.name)}</div><div class="unit">${money(b.price)} / ${esc(b.unit)}</div></div>
+    <div><div class="name">${esc(b.name)}</div><div class="unit">${money(b.price)} / ${esc(b.unit)}${by}</div></div>
     <div class="qty"><button type="button" data-d="-1" aria-label="Fewer ${esc(b.name)}">−</button><output>${qtys[b.id]}</output><button type="button" data-d="1" aria-label="More ${esc(b.name)}">+</button></div>
   </div>`;
 }).join("");
@@ -72,7 +74,8 @@ const render = () => document.getElementById("total").textContent = money(total(
 linesEl.addEventListener("click", e => {
   const btn = e.target.closest("button[data-d]"); if (!btn) return;
   const line = btn.closest(".line"), id = line.dataset.id;
-  qtys[id] = Math.max(0, Math.min(24, qtys[id] + +btn.dataset.d));
+  const s = step(id);
+  qtys[id] = Math.max(0, Math.min(24 * s, qtys[id] + s * +btn.dataset.d));
   line.querySelector("output").textContent = qtys[id];
   render();
 });
@@ -85,7 +88,7 @@ function orderText() {
   const name = document.getElementById("custName").value.trim();
   const notes = document.getElementById("notes").value.trim();
   const items = BAKES.filter(b => qtys[b.id] > 0).map(b => `  ${qtys[b.id]} × ${b.name} (${money(qtys[b.id] * b.price)})`);
-  return ["Hello Saturday Bakehouse,", "",
+  return ["Hello Jade’s Saturday Bakehouse,", "",
     `I'd like to reserve the following for pickup on ${sat}, ${document.getElementById("pickupTime").value}:`, "",
     ...items, "", `Total: ${money(total())}`, notes ? `\nNotes: ${notes}` : "", "", "Thank you!", name].join("\n");
 }

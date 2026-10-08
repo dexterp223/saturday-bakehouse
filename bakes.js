@@ -10,22 +10,22 @@ const BAKES = [
   {
     id: "sourdough", name: "Sourdough", price: 450, unit: "loaf", meta: "Loaf · 36 hr ferment",
     description: "Open crumb, blistered crust, a gentle tang from our six-year-old starter.",
-    photo: "img/sourdough.jpg", alt: "A scored sourdough loaf with a leaf pattern on the crust",
-    credit: "Kate Tepla / Unsplash",
+    photo: "img/sourdough-jade.jpg", alt: "A crusty scored sourdough boule beside a sliced half showing its open crumb",
+    credit: "",
     allergens: "Wheat (gluten)."
   },
   {
     id: "focaccia", name: "Focaccia", price: 350, unit: "slab", meta: "Slab · olive oil & rosemary",
     description: "Dimpled and golden with olive oil, flaky salt, and fresh rosemary.",
-    photo: "img/focaccia.jpg", alt: "Golden focaccia topped with rosemary",
-    credit: "Quin Engle / Unsplash",
+    photo: "img/focaccia-jade.jpg", alt: "A slab of golden focaccia with rosemary on a wooden board",
+    credit: "",
     allergens: "Wheat (gluten)."
   },
   {
-    id: "rolls", name: "Cinnamon rolls", price: 100, unit: "each", meta: "Each · glazed warm",
-    description: "Soft, buttery swirls with brown-sugar cinnamon and a vanilla glaze.",
-    photo: "img/cinnamon-rolls.jpg", alt: "A pan of freshly baked cinnamon rolls",
-    credit: "Phil Hearing / Unsplash",
+    id: "spanish", name: "Spanish bread", price: 100, unit: "dozen", meta: "Per dozen · min. 1 dozen",
+    description: "Soft rolled bread with a sweet buttery filling and a crunchy sugar-crumb coating.",
+    photo: "img/spanish-bread.webp", alt: "Trays of golden Spanish bread rolls dusted with sugar crumbs",
+    credit: "",
     allergens: "Wheat (gluten), milk, egg."
   }
 ];
@@ -39,7 +39,7 @@ function nextSaturday() {
 
 function bakeCard(b, withAllergens) {
   return `<article class="tag">
-    <figure class="photo"><img src="${b.photo}" alt="${esc(b.alt)}" width="800" height="600"><figcaption>Photo: ${esc(b.credit)}</figcaption></figure>
+    <figure class="photo"><img src="${b.photo}" alt="${esc(b.alt)}" width="800" height="600">${b.credit ? `<figcaption>Photo: ${esc(b.credit)}</figcaption>` : ""}</figure>
     <h3>${esc(b.name)}</h3>
     <p>${esc(b.description)}</p>
     ${withAllergens ? `<p class="allergen"><strong>Contains:</strong> ${esc(b.allergens)}</p>` : ""}
