@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saturday Bakehouse</title>
+<meta name="description" content="Fresh sourdough, focaccia and cinnamon rolls, baked every Saturday in Nuvali.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&family=Courier+Prime&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="wrap" data-page="home">
+  <header class="top">
+    <a class="mark" href="./"><svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="16" ry="11" fill="var(--accent)"/><path d="M10 19c3-3 5-3 7 0M17 17c3-3 5-3 7 0M24 19c3-3 5-3 7 0" stroke="var(--bg)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Saturday Bakehouse</a>
+    <nav class="nav" aria-label="Main"><a href="./" data-page="home">Home</a><a href="menu.html" data-page="menu">Menu</a><a href="order.html" data-page="order">Order</a><a href="about.html" data-page="about">About</a><a href="faq.html" data-page="faq">FAQ</a></nav>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Small-batch · baked at dawn · <span data-cutoff></span></div>
+    <h1>Fresh Every <em>Saturday</em></h1>
+    <p class="lede">We mix on Thursday, let the dough rest slow through Friday, and pull everything from the oven early Saturday morning. Reserve yours and it’ll be waiting, still warm.</p>
+    <div class="actions">
+      <a class="btn" href="order.html">Order for Saturday</a>
+      <a class="btn ghost" href="menu.html">See the full menu</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>This week’s bakes</h2><p data-saturday>This Saturday</p></div>
+    <div class="bakes" data-bakes="short"></div>
+  </section>
+
+  <section class="split">
+    <div class="prose">
+      <div class="eyebrow">About the bakehouse</div>
+      <h2>Your neighborhood bakery in Nuvali</h2>
+      <p>Saturday Bakehouse started as a weekend habit: real sourdough, baked slowly, shared with neighbors who kept asking for another loaf. Now we bake one morning a week for Nuvali, in small batches, so every order is fresh from the oven.</p>
+      <p><a class="linkbtn" href="about.html">Read our story</a></p>
+    </div>
+    <div class="card">
+      <h3>Pickup</h3>
+      <dl class="facts">
+        <dt>When</dt><dd data-hours></dd>
+        <dt>Where</dt><dd data-place></dd>
+        <dt>Pay</dt><dd data-pay></dd>
+        <dt>Order by</dt><dd>Wednesday 8pm</dd>
+      </dl>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mark">Saturday Bakehouse</div>
+    <div>Fresh Every Saturday · <span data-email></span></div>
+  </footer>
+</div>
+<script src="bakes.js"></script>
+</body>
+</html>
