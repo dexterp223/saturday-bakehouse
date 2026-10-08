@@ -133,7 +133,7 @@ document.getElementById("orderForm").addEventListener("submit", e => {
     if (!document.getElementById("address").value.trim()) { status.textContent = "Add your delivery address."; document.getElementById("address").focus(); return; }
     if (!document.getElementById("phone").value.trim()) { status.textContent = "Add a mobile number so the rider can reach you."; document.getElementById("phone").focus(); return; }
   }
-  location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent("Saturday order: " + name)}&body=${encodeURIComponent(orderText())}`;
+  location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(`${isDelivery() ? "Delivery" : "Pickup"} order for ${sat}: ${name}`)}&body=${encodeURIComponent(orderText())}`;
   status.textContent = "Opening your email app. Press send there to place the order.";
 });
 document.getElementById("copyBtn").addEventListener("click", () => {
